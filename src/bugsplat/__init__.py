@@ -47,6 +47,7 @@ class BugSplat:
         # TODO BG what if ex is not defined? Do we care?
         # https://stackoverflow.com/questions/3702675/how-to-catch-and-print-the-full-exception-traceback-without-halting-exiting-the
         callstack = self._convertExceptionToJson(ex)
+        exceptionMessage = str(ex)
 
         print('About to post crash to database ' + self.database + '...')
         print('\n')
@@ -65,6 +66,7 @@ class BugSplat:
             'appVersion': self.version,
             'appKey': appKey,
             'description': description,
+            'exceptionMessage': exceptionMessage,
             'email': email,
             'user': user,
             'callstack': callstack
