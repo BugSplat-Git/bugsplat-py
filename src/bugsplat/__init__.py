@@ -86,9 +86,9 @@ class BugSplat:
 
     def _convertExceptionToJson(self, ex): 
         stack = []
-        tb = traceback.extract_tb(ex.__traceback__)
+        tb = traceback.TracebackException.from_exception(ex, capture_locals=True)
         
-        for t in tb:
+        for t in tb.stack:
             stack.append({
                 'filename': t.filename,
                 'line': t.line,
