@@ -6,13 +6,17 @@ from helpers import crash
 
 here = pathlib.Path(__file__).parent.resolve()
 additionalFilePath = os.path.join(here, 'attachment.txt')
+additionalFilePath2 = os.path.join(here, 'attachment2.txt')
 
 bugsplat = BugSplat('fred', 'my-python-crasher', '1.0.0')
 bugsplat.setDefaultAppKey('key!')
 bugsplat.setDefaultDescription('description!')
 bugsplat.setDefaultEmail('fred@bugsplat.com')
 bugsplat.setDefaultUser('Fred')
-bugsplat.setDefaultAdditionalFilePaths([additionalFilePath])
+bugsplat.setDefaultAdditionalFilePaths([
+    additionalFilePath,
+    additionalFilePath2
+])
 
 try:
     crash()
