@@ -17,17 +17,24 @@ from bugsplat import BugSplat
 ```python
 bugsplat = BugSplat(database, application, version)
 ```
-3. Optionally, you set default values for appKey, description, email and user
+3. Optionally, you set default values for appKey, description, email, user and additionaFilePaths
 ```python
 bugsplat.setDefaultAppKey('key!')
 bugsplat.setDefaultDescription('description!')
 bugsplat.setDefaultEmail('fred@bugsplat.com')
 bugsplat.setDefaultUser('Fred')
+bugsplat.setDefaultAdditionalFilePaths([
+    additionalFilePath,
+    additionalFilePath2
+])
 ```
 4. Wrap your application code in a try except block. In the except block call post. You can override any of the default properties that were set in step 3
 ```python
 try:
     crash()
 except Exception as e:
-    bugsplat.post(e, appKey='other key!', description='other description!', email='barney@bugsplat.com', user = 'Barney')
+    bugsplat.post(e, additionalFilePaths=[], appKey='other key!', description='other description!', email='barney@bugsplat.com', user='Barney')
 ```
+5. Once you've posted a crash, navigate to the Crashes page and click the link in the ID column to be see the crash's details
+
+Thanks for using BugSplat ❤️
