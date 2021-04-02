@@ -1,5 +1,6 @@
 import json
 import os
+import platform
 import requests
 import traceback
 import sys
@@ -51,6 +52,10 @@ class BugSplat:
         if (len(additionalFilePaths) == 0): additionalFilePaths = self.additionalFilePaths
         files = self._createFilesForPost(additionalFilePaths)
 
+        pyVersion = sys.version.split('\n')[0].rstrip()
+        osVersion = platform.platform()
+        environment = 'Python ' + pyVersion + ' ' + osVersion
+
         data = {
             'database': self.database,
             'appName': self.application,
@@ -60,7 +65,8 @@ class BugSplat:
             'exceptionMessage': exceptionMessage,
             'email': email,
             'user': user,
-            'callstack': callstack
+            'callstack': callstack,
+            'environment': environment
         }
 
         try:
