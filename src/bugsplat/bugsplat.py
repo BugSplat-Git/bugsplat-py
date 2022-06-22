@@ -1,6 +1,7 @@
 import json
 import traceback
 from logging import Logger, getLogger
+from os import PathLike
 from pathlib import PurePath
 from typing import List
 
@@ -23,7 +24,7 @@ class BugSplat:
         self.user = ''
         self.logger = logger or getLogger(__name__)
 
-    def set_default_additional_file_paths(self, additional_file_paths: List[str]):
+    def set_default_additional_file_paths(self, additional_file_paths: List[PathLike]):
         self.additional_file_paths = additional_file_paths
 
     def set_default_app_key(self, key: str):
@@ -48,7 +49,7 @@ class BugSplat:
 
     def post(self,
              ex: BaseException or str,
-             additional_file_paths: List[str] = None,
+             additional_file_paths: List[PathLike] = None,
              app_key: str = '',
              description: str = '',
              email: str = '',
@@ -109,7 +110,7 @@ class BugSplat:
         return json.dumps([frame_summary_to_dict(t) for t in tb.stack])
 
     @staticmethod
-    def _create_files_for_post(paths: List[str]):
+    def _create_files_for_post(paths: List[PathLike]):
         files = {}
 
         for p in paths:

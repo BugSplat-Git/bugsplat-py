@@ -4,9 +4,9 @@ import sys
 from bugsplat import BugSplat
 from helpers import crash
 
-here = pathlib.Path(__file__).parent.resolve()
-additionalFilePath = os.path.join(here, 'attachment.txt')
-additionalFilePath2 = os.path.join(here, 'attachment2.txt')
+here = pathlib.Path(__file__).parent
+additionalFilePath = here / 'attachment.txt'
+additionalFilePath2 = here / 'attachment2.txt'
 
 bugsplat = BugSplat('fred', 'my-python-crasher', '1.0.0')
 bugsplat.set_default_app_key('key!')
