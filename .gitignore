@@ -3,3 +3,7 @@
 build
 dist
 .DS_Store
+venv/
+
+.vscode
+.idea
