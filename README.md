@@ -1,10 +1,21 @@
-[![BugSplat](https://s3.amazonaws.com/bugsplat-public/npm/header.png)](https://www.bugsplat.com)
+[![bugsplat-github-banner-basic-outline](https://user-images.githubusercontent.com/20464226/149019306-3186103c-5315-4dad-a499-4fd1df408475.png)](https://bugsplat.com)
+<br/>
+# <div align="center">BugSplat</div> 
+### **<div align="center">Crash and error reporting built for busy developers.</div>**
+<div align="center">
+    <a href="https://twitter.com/BugSplatCo">
+        <img alt="Follow @bugsplatco on Twitter" src="https://img.shields.io/twitter/follow/bugsplatco?label=Follow%20BugSplat&style=social">
+    </a>
+    <a href="https://discord.gg/K4KjjRV5ve">
+        <img alt="Join BugSplat on Discord" src="https://img.shields.io/discord/664965194799251487?label=Join%20Discord&logo=Discord&style=social">
+    </a>
+</div>
 
-# bugsplat-py
+## 👋 Introduction
 
-A BugSplat integration for reporting Unhandled Exceptions in Python.
+This repo contains the source code for bugsplat-py, a BugSplat integration for reporting Unhandled Exceptions in Python.
 
-## Installing
+## 🏗 Installation
 
 Install the bugsplat package using pip
 
@@ -12,10 +23,9 @@ Install the bugsplat package using pip
 pip install bugsplat
 ```
 
-## Usage
+## ⚙️ Configuration
 
 1. Import the BugSplat class
-
 ```python
 from bugsplat import BugSplat
 ```
@@ -57,11 +67,9 @@ except Exception as e:
 
 5. Once you've posted a crash, navigate to the Crashes page and click the link in the ID column to be see the crash's details
 
-![image](https://user-images.githubusercontent.com/2646053/113363245-5b993000-931e-11eb-9ee0-fc2fecf3364e.png)
+<img width="1713" alt="BugSplat Crash Page" src="https://user-images.githubusercontent.com/2646053/175091507-32a9c505-1d26-4d5b-aef7-44b5a347ddb4.png">
 
-Thanks for using BugSplat ❤️
-
-## Development
+## 🧑‍💻 Development
 
 To get a development environment started:
 
@@ -92,3 +100,5 @@ source venv/bin/activate
 ```shell
 pip install .
 ```
+
+Thanks for using BugSplat ❤️
