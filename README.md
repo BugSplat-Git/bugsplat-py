@@ -34,12 +34,42 @@ bugsplat.setDefaultAdditionalFilePaths([
 try:
     crash()
 except Exception as e:
-    bugsplat.post(e, additionalFilePaths=[], appKey='other key!', description='other description!', email='barney@bugsplat.com', user='Barney')
+    bugsplat.post(
+        e, 
+        additionalFilePaths=[], 
+        appKey='other key!', 
+        description='other description!', 
+        email='barney@bugsplat.com', 
+        user='Barney'
+    )
 ```
 5. Once you've posted a crash, navigate to the Crashes page and click the link in the ID column to be see the crash's details
 
 ![image](https://user-images.githubusercontent.com/2646053/113363245-5b993000-931e-11eb-9ee0-fc2fecf3364e.png)
 
-
-
 Thanks for using BugSplat ❤️
+
+## Development
+
+To get a development environment started:
+
+1. Clone the repository
+```shell
+git clone https://github.com/BugSplat-Git/bugsplat-py.git
+```
+2. Create a virtual environment
+```shell
+pyhon -m venv venv
+```
+3. Activate virtual environment
+```shell
+# unix/macos
+source venv/bin/activate
+
+# windows
+.\env\Scripts\activate
+```
+4. Install dependencies
+```shell
+python -m pip install -r requirements.txt
+```
