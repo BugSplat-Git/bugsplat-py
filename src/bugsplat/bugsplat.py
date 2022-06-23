@@ -1,19 +1,21 @@
 import json
 import traceback
-from logging import Logger, getLogger
+import logging
 from os import PathLike
 from pathlib import Path
 from typing import List
 
 import requests
 
+# setup a basic logging config if one isn't already set
+logging.basicConfig(level="info")
 
 class BugSplat:
     def __init__(self,
                  database: str,
                  application: str,
                  version: str,
-                 logger: Logger = None):
+                 logger: logging.Logger = None):
         self.database = database
         self.application = application
         self.version = version
@@ -22,7 +24,7 @@ class BugSplat:
         self.description = ''
         self.email = ''
         self.user = ''
-        self.logger = logger or getLogger(__name__)
+        self.logger = logger or logging.getLogger(__name__)
 
     def set_default_additional_file_paths(self, additional_file_paths: List[PathLike]):
         self.additional_file_paths = additional_file_paths
@@ -50,13 +52,13 @@ class BugSplat:
         if not additional_file_paths:
             additional_file_paths = self.additional_file_paths
 
-        self.logger.warning('\nBugSplat caught an Unhandled Exception!\n')
+        self.logger.info('\nBugSplat caught an Unhandled Exception!\n')
 
         # TODO BG what if ex is not defined? Do we care?
         # https://stackoverflow.com/q/3702675/4272428
         callstack = self._convert_exception_to_json(ex)
 
-        self.logger.warning(f'About to post crash to database {self.database}...\n')
+        self.logger.info(f'About to post crash to database {self.database}...\n')
 
         url = f'https://{self.database}.bugsplat.com/post/py/'
         files = self._create_files_for_post(additional_file_paths)
@@ -81,7 +83,7 @@ class BugSplat:
                     f'Status: {response.status_code} \n Message: {response.text}'
                 )
 
-            self.logger.warning('Crash posted successfully!')
+            self.logger.info('Crash posted successfully!')
         except Exception as ex:
             self.logger.exception('Crash post failed!', exc_info=ex)
 
