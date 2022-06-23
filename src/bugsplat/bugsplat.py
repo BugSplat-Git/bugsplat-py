@@ -2,7 +2,7 @@ import json
 import traceback
 from logging import Logger, getLogger
 from os import PathLike
-from pathlib import PurePath
+from pathlib import Path
 from typing import List
 
 import requests
@@ -39,14 +39,6 @@ class BugSplat:
     def set_default_user(self, user: str):
         self.user = user
 
-    # TODO Remove these completely
-    # left as aliases so nothing breaks
-    setDefaultAdditionalFilePaths = set_default_additional_file_paths
-    setDefaultAppKey = set_default_app_key
-    setDefaultDescription = set_default_description
-    setDefaultEmail = set_default_email
-    setDefaultUser = set_default_user
-
     def post(self,
              ex: BaseException or str,
              additional_file_paths: List[PathLike] = None,
@@ -61,8 +53,7 @@ class BugSplat:
         self.logger.warning('\nBugSplat caught an Unhandled Exception!\n')
 
         # TODO BG what if ex is not defined? Do we care?
-        # https://stackoverflow.com/questions/3702675/how-to-catch-and-print-the-full
-        # -exception-traceback-without-halting-exiting-the
+        # https://stackoverflow.com/q/3702675/4272428
         callstack = self._convert_exception_to_json(ex)
 
         self.logger.warning(f'About to post crash to database {self.database}...\n')
@@ -114,7 +105,7 @@ class BugSplat:
         files = {}
 
         for p in paths:
-            name = PurePath(p).name
+            name = Path(p).name
             files[name] = open(p, 'rb')
 
         return files
