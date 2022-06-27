@@ -13,13 +13,29 @@
 
 ## 👋 Introduction
 
-This repo contains the source code for bugsplat-py, a BugSplat integration for reporting Unhandled Exceptions in Python.
+This repo contains the source code for [bugsplat-py](https://github.com/BugSplat-Git/bugsplat-py), a BugSplat integration for reporting Unhandled Exceptions in Python.
 
 ## 🏗 Installation
 
-Install the bugsplat package using pip
+BugSplat recommends you use [bugsplat-py](https://github.com/BugSplat-Git/bugsplat-py) with a Python [virtual environment](https://docs.python.org/3/library/venv.html). To create a virtual environment for your project please run the following command at your project's root directory:
 
 ```shell
+python -m venv venv
+```
+
+Activate your virtual environment by running the following command:
+
+```shell
+# unix/macos
+source venv/bin/activate
+
+# windows
+.\env\Scripts\activate
+```
+
+Install the [bugsplat](https://pypi.org/project/bugsplat) package using pip:
+
+```bash
 pip install bugsplat
 ```
 
