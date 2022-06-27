@@ -26,7 +26,6 @@ pip install bugsplat
 ## ⚙️ Configuration
 
 1. Import the BugSplat class
-
 ```python
 from bugsplat import BugSplat
 ```
@@ -40,11 +39,11 @@ bugsplat = BugSplat(database, application, version)
 3. Optionally, you set default values for appKey, description, email, user and additionaFilePaths
 
 ```python
-bugsplat.setDefaultAppKey('key!')
-bugsplat.setDefaultDescription('description!')
-bugsplat.setDefaultEmail('fred@bugsplat.com')
-bugsplat.setDefaultUser('Fred')
-bugsplat.setDefaultAdditionalFilePaths([
+bugsplat.set_default_app_key('key!')
+bugsplat.set_default_description('description!')
+bugsplat.set_default_email('fred@bugsplat.com')
+bugsplat.set_default_user('Fred')
+bugsplat.set_default_additional_file_paths([
     './path/to/additional-file.txt',
     './path/to/additional-file-2.txt'
 ])
@@ -57,11 +56,11 @@ try:
     crash()
 except Exception as e:
     bugsplat.post(
-        e, 
-        additionalFilePaths=[], 
-        appKey='other key!', 
-        description='other description!', 
-        email='barney@bugsplat.com', 
+        e,
+        additional_file_paths=[],
+        app_key='other key!',
+        description='other description!',
+        email='barney@bugsplat.com',
         user='Barney'
     )
 ```
