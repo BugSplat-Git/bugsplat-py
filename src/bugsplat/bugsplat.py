@@ -8,7 +8,7 @@ from typing import List
 import requests
 
 # setup a basic logging config if one isn't already set
-logging.basicConfig(level="info")
+logging.basicConfig(level=logging.INFO)
 
 class BugSplat:
     def __init__(self,
