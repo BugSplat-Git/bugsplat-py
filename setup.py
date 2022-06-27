@@ -7,7 +7,7 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 
 setup(
     name='bugsplat',
-    version='0.2.0',
+    version='1.0.0',
     description='A Python package for sending Unhandled Exceptions to BugSplat',
     long_description=long_description,
     long_description_content_type='text/markdown',
