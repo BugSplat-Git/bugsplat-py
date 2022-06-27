@@ -72,7 +72,7 @@ except Exception as e:
 
 ## 🧑‍💻 Development
 
-To get a development environment started:
+To configure a development environment:
 
 1. Clone the repository
 
@@ -83,10 +83,10 @@ git clone https://github.com/BugSplat-Git/bugsplat-py.git
 2. Create a virtual environment
 
 ```shell
-pyhon -m venv venv
+python -m venv venv
 ```
 
-3. Activate virtual environment
+3. Activate the virtual environment
 
 ```shell
 # unix/macos
@@ -96,7 +96,7 @@ source venv/bin/activate
 .\env\Scripts\activate
 ```
 
-4. Install dependencies
+4. Install the project's dependencies
 
 ```shell
 pip install .
