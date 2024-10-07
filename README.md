@@ -30,7 +30,7 @@ Activate your virtual environment by running the following command:
 source venv/bin/activate
 
 # windows
-.\env\Scripts\activate
+.\venv\Scripts\activate
 ```
 
 Install the [bugsplat](https://pypi.org/project/bugsplat) package using pip:
