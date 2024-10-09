@@ -98,17 +98,17 @@ git clone https://github.com/BugSplat-Git/bugsplat-py.git
 2. Create a virtual environment
 
 ```shell
-python -m venv venv
+python -m venv .venv
 ```
 
 3. Activate the virtual environment
 
 ```shell
 # unix/macos
-source venv/bin/activate
+source .venv/bin/activate
 
 # windows
-.\env\Scripts\activate
+.\.venv\Scripts\activate
 ```
 
 4. Install the project's dependencies

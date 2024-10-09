@@ -1,0 +1,43 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "bugsplat"
+version = "1.0.4"
+authors = [
+  { name="Bobby Galli", email="bobby@bugsplat.com" },
+]
+description = "A Python package for sending Unhandled Exceptions to BugSplat"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Environment :: Console",
+    "Environment :: Web Environment",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3 :: Only"
+]
+dependencies = [
+  'requests<=2.29.0'
+]
+
+[project.optional-dependencies]
+test = [
+    "certifi==2022.6.15",
+    "charset-normalizer==2.0.12",
+    "idna==3.3",
+    "requests==2.29.0",
+    "urllib3==1.26.9"
+]
+
+[project.urls]
+Homepage = "https://github.com/BugSplat-Git/bugsplat-py"
+Issues = "https://github.com/BugSplat-Git/bugsplat-py/issues"
