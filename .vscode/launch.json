@@ -10,7 +10,8 @@
             "request": "launch",
             "program": "./tests/test_bugsplat.py",
             "console": "integratedTerminal",
-            "env": {"PYTHONPATH": "${workspaceRoot}"}
+            "env": {"PYTHONPATH": "${workspaceRoot}"},
+            "justMyCode": false
         },
         {
             "name": "Python: Current File",
@@ -18,7 +19,8 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "env": {"PYTHONPATH": "${workspaceRoot}"}
+            "env": {"PYTHONPATH": "${workspaceRoot}"},
+            "justMyCode": false
         }
     ]
 }
