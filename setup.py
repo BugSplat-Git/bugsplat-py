@@ -7,7 +7,7 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 
 setup(
     name='bugsplat',
-    version='1.0.3',
+    version='1.0.4',
     description='A Python package for sending Unhandled Exceptions to BugSplat',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -33,7 +33,7 @@ setup(
     packages=find_packages(where='src'),
     python_requires='>=3.6, <4',
     install_requires=[
-        'requests'
+        'requests<=2.29.0'
     ],
     project_urls={
         'Bug Reports': 'https://github.com/BugSplat-Git/bugsplat-py/issues',

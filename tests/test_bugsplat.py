@@ -1,5 +1,5 @@
 from pathlib import Path
-from bugsplat import BugSplat
+from src.bugsplat.bugsplat import BugSplat
 from helpers import crash
 
 cwd = Path(__file__).parent
