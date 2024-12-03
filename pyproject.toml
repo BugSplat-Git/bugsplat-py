@@ -34,7 +34,7 @@ test = [
     "certifi==2022.6.15",
     "charset-normalizer==2.0.12",
     "idna==3.3",
-    "requests==2.29.0",
+    "requests==2.32.2",
     "urllib3==1.26.9"
 ]
 
