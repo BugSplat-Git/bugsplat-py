@@ -1,6 +1,8 @@
+import io
 import json
 import traceback
 import logging
+import zipfile
 from os import PathLike
 from pathlib import Path
 from typing import List
@@ -86,6 +88,77 @@ class BugSplat:
             self.logger.info('Crash posted successfully!')
         except Exception as ex:
             self.logger.exception('Crash post failed!', exc_info=ex)
+
+    def post_feedback(self,
+                      title: str,
+                      description: str = '',
+                      email: str = '',
+                      user: str = '',
+                      app_key: str = ''):
+        """Post user feedback to BugSplat using the presigned URL upload flow.
+
+        Args:
+            title: Feedback title, used as the stack key for grouping in the dashboard.
+            description: Additional feedback context.
+            email: Email of the user submitting feedback.
+            user: Name or id of the user submitting feedback.
+            app_key: Application key for support response page variation.
+        """
+        if not title:
+            self.logger.error('Error: title cannot be empty when posting feedback to BugSplat')
+            return
+
+        self.logger.info(f'About to post feedback to database {self.database}...\n')
+
+        base_url = f'https://{self.database}.bugsplat.com'
+
+        # Create feedback.json and zip it
+        feedback_json = json.dumps({'title': title, 'description': description or self.description})
+        zip_buffer = io.BytesIO()
+        with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zf:
+            zf.writestr('feedback.json', feedback_json)
+        zip_data = zip_buffer.getvalue()
+
+        try:
+            # Step 1: Get presigned upload URL
+            get_url_params = {
+                'database': self.database,
+                'appName': self.application,
+                'appVersion': self.version,
+                'crashPostSize': len(zip_data)
+            }
+            get_url_response = requests.get(f'{base_url}/api/getCrashUploadUrl', params=get_url_params)
+            get_url_response.raise_for_status()
+            presigned_url = get_url_response.json()['url']
+
+            # Step 2: Upload zip to S3
+            put_response = requests.put(
+                presigned_url,
+                data=zip_data,
+                headers={'Content-Type': 'application/zip'}
+            )
+            put_response.raise_for_status()
+            etag = put_response.headers.get('ETag', '').strip('"')
+
+            # Step 3: Commit the upload
+            commit_data = {
+                'database': self.database,
+                'appName': self.application,
+                'appVersion': self.version,
+                'crashTypeId': '36',
+                's3Key': presigned_url,
+                'md5': etag,
+                'description': description or self.description,
+                'email': email or self.email,
+                'user': user or self.user,
+                'appKey': app_key or self.app_key,
+            }
+            commit_response = requests.post(f'{base_url}/api/commitS3CrashUpload', data=commit_data)
+            commit_response.raise_for_status()
+
+            self.logger.info('Feedback posted successfully!')
+        except Exception as ex:
+            self.logger.exception('Feedback post failed!', exc_info=ex)
 
     @staticmethod
     def _convert_exception_to_json(ex: BaseException):
