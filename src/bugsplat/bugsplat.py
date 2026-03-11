@@ -1,5 +1,6 @@
 import io
 import json
+import os
 import traceback
 import logging
 import zipfile
@@ -94,7 +95,8 @@ class BugSplat:
                       description: str = '',
                       email: str = '',
                       user: str = '',
-                      app_key: str = ''):
+                      app_key: str = '',
+                      additional_file_paths: List[PathLike] = None):
         """Post user feedback to BugSplat using the presigned URL upload flow.
 
         Args:
@@ -103,7 +105,11 @@ class BugSplat:
             email: Email of the user submitting feedback.
             user: Name or id of the user submitting feedback.
             app_key: Application key for support response page variation.
+            additional_file_paths: List of file paths to attach alongside the feedback.
         """
+        if not additional_file_paths:
+            additional_file_paths = self.additional_file_paths
+
         if not title:
             self.logger.error('Error: title cannot be empty when posting feedback to BugSplat')
             return
@@ -117,6 +123,9 @@ class BugSplat:
         zip_buffer = io.BytesIO()
         with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zf:
             zf.writestr('feedback.json', feedback_json)
+            for file_path in additional_file_paths:
+                if os.path.isfile(file_path):
+                    zf.write(file_path, os.path.basename(file_path))
         zip_data = zip_buffer.getvalue()
 
         try:
